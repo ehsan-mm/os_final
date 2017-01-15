@@ -49,16 +49,16 @@ argint(int n, int *ip)
 }
 
 // Fetch the nth word-sized system call argument as a pointer
-// to a block of memory of size bytes.  Check that the pointer
+// to a block of memory of size n bytes.  Check that the pointer
 // lies within the process address space.
 int
 argptr(int n, char **pp, int size)
 {
   int i;
-
+  
   if(argint(n, &i) < 0)
     return -1;
-  if(size < 0 || (uint)i >= proc->sz || (uint)i+size > proc->sz)
+  if((uint)i >= proc->sz || (uint)i+size > proc->sz)
     return -1;
   *pp = (char*)i;
   return 0;
@@ -96,12 +96,9 @@ extern int sys_sbrk(void);
 extern int sys_sleep(void);
 extern int sys_unlink(void);
 extern int sys_wait(void);
+extern int sys_getperf(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
-extern int sys_getppid(void);
-extern int sys_getperf(void);
-
-
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
 [SYS_exit]    sys_exit,
@@ -124,7 +121,6 @@ static int (*syscalls[])(void) = {
 [SYS_link]    sys_link,
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
-[SYS_getppid]   sys_getppid,
 [SYS_getperf]   sys_getperf,
 };
 
