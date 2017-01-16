@@ -53,26 +53,30 @@ found:
   release(&ptable.lock);
 
   // Allocate kernel stack.
+
   if((p->kstack = kalloc()) == 0){
     p->state = UNUSED;
     return 0;
   }
+
   sp = p->kstack + KSTACKSIZE;
 
   // Leave room for trap frame.
+
   sp -= sizeof *p->tf;
   p->tf = (struct trapframe*)sp;
 
   // Set up new context to start executing at forkret,
   // which returns to trapret.
+
   sp -= 4;
   *(uint*)sp = (uint)trapret;
-
   sp -= sizeof *p->context;
   p->context = (struct context*)sp;
   memset(p->context, 0, sizeof *p->context);
   p->context->eip = (uint)forkret;
-	 p->ctime = ticks;         // start time
+
+  p->ctime = ticks;         // start time
   p->etime = 0;             // end time
   p->rtime = 0;             // run time
  
@@ -280,11 +284,11 @@ getperf(int *wtime, int *rtime)
   acquire(&ptable.lock);
   for(;;){
     // Scan through table looking for zombie children.
-    //havekids = 0;
+    //hasids = 0;
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->parent != proc)
         continue;
-     // havekids = 1;
+     // haskids = 1;
       if(p->state == ZOMBIE){
         // Found one.
 
@@ -328,14 +332,19 @@ scheduler(void)
 
     // Loop over process table looking for process to run.
     if(SCHEDFLAG == 1){
+
     acquire(&ptable.lock);
+
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+
       if(p->state != RUNNABLE || ticks%QUANTA!=0)
+
         continue;
 
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
+
       proc = p;
       switchuvm(p);
       p->state = RUNNING;
@@ -346,10 +355,15 @@ scheduler(void)
       // It should have changed its p->state before coming back.
       proc = 0;
     }
+
     release(&ptable.lock);
+
     }
+
     if(SCHEDFLAG == 2){
 	
+
+
     }
   }
 }
