@@ -6,6 +6,52 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
+#include <stdbool.h>
+
+
+
+struct proc* qq[32];
+int top = 0;
+int end = -1;
+int quant= 0;
+int MAX =32;
+
+
+struct proc* peek() {
+   return qq[top];
+}
+
+bool isEmpty() {
+   return quant == 0;
+}
+
+bool isFull() {
+   return quant == MAX;
+}
+
+void insert(struct proc* data) {
+
+   if(!isFull()) {
+	
+      if(end == MAX-1) {
+         end = -1;            
+      }       
+
+      qq[++end] = data;
+      quant++;
+   }
+}
+
+struct proc* removeData() {
+   struct proc* data = qq[top++];
+	
+   if(top == MAX) {
+      top = 0;
+   }
+	
+   quant--;
+   return data;  
+}
 
 struct {
   struct spinlock lock;
