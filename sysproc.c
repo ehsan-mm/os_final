@@ -6,6 +6,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+
 int
 sys_fork(void)
 {
@@ -23,22 +24,6 @@ int
 sys_wait(void)
 {
   return wait();
-}
-
-
-int 
-sys_getperfvoid)
-{
-  int *wtime;
-  int *rtime;
-  
-  if(argptr(0, (char**)&wtime, sizeof(int)) < 0)
-    return -1;
-
-  if(argptr(1, (char**)&rtime, sizeof(int)) < 0)
-    return -1;
-
-  return getperf(wtime, rtime);
 }
 
 int
@@ -76,7 +61,7 @@ sys_sleep(void)
 {
   int n;
   uint ticks0;
-  
+
   if(argint(0, &n) < 0)
     return -1;
   acquire(&tickslock);
@@ -98,9 +83,23 @@ int
 sys_uptime(void)
 {
   uint xticks;
-  
+
   acquire(&tickslock);
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+int
+sys_getperf(void)
+{
+  
+	char *wtime;
+	char *rtime;
+	argstr(0,&wtime);
+	argstr(1,&rtime);
+	*wtime = ticks - proc->ctime - proc->rtime;
+	*rtime = proc->rtime;
+	return 0;
+
+
 }

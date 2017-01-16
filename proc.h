@@ -1,16 +1,13 @@
-// Segments in proc->gdt.
-#define NSEGS     7
-
 // Per-CPU state
 struct cpu {
-  uchar id;                    // Local APIC ID; index into cpus[] below
+  uchar apicid;                // Local APIC ID
   struct context *scheduler;   // swtch() here to enter scheduler
   struct taskstate ts;         // Used by x86 to find stack for interrupt
   struct segdesc gdt[NSEGS];   // x86 global descriptor table
   volatile uint started;       // Has the CPU started?
   int ncli;                    // Depth of pushcli nesting.
   int intena;                  // Were interrupts enabled before pushcli?
-  
+
   // Cpu-local storage variables; see below
   struct cpu *cpu;
   struct proc *proc;           // The currently-running process.
@@ -66,9 +63,7 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
-
-  // Added the  fields stime, etime, rtime and iotime
-  int stime, etime, rtime , iotime;
+	int ctime	,etime	,rtime;		 // Define Vars
 };
 
 // Process memory is laid out contiguously, low addresses first:
