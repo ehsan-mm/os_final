@@ -177,6 +177,7 @@ UPROGS=\
 	_rrsanity\
 	_frrsanity\
 	_gsanity\
+	_getppid\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)

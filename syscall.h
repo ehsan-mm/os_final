@@ -24,3 +24,4 @@
 #define SYS_rrsanity 23
 #define SYS_frrsanity  24
 #define SYS_gsanity  25
+#define SYS_getppid 26

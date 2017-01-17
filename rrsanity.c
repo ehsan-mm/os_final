@@ -1,23 +1,32 @@
 
 #include "types.h"
 #include "user.h"
+#include "stat.h"
+
 int main (void)
 {
-int ChildPid[10] , wTime[10] , rTime[10];
-  for(int j=0 ; j<10 ; j++){
+  int ChildPid[10] ;
+  int wTime[10] ;
+  int rTime[10];
+  int i = 0 ;
+  int ii=0 ;
+  int iii=0 ;
+  int j=0;
+
+  for(j=0 ; j<10 ; j++){
 	ChildPid[j] = fork();
 	if(ChildPid[j] == 0){
-		for(int i =0 ; i<10 ; i++)
+		for(i=0 ; i<1000 ; i++)
 			printf(1 , "Child %d prints for the %d time. \n" , getpid() , i);
 	exit();
 	}	
-}
+	}
 	
-  for(int i = 0 ; i<5 ; i++)
-	wait2(&wTime[i] , &rTime[i]);
+  for(ii=0; ii<10 ; ii++)
+	getperf(&wTime[ii] , &rTime[ii]);
 
-  for(int i = 0 ; i<5 ; i++)
-	printf(1 , "wTime is %d. rTime is %d , turnaroundtime : %d \n" , wTime[i] , rTime[i] , wTime[i]+rTime[i]);
+  for(iii=0 ; iii<10 ; iii++)
+	printf(1 , "wTime is %d. rTime is %d , turnaroundtime : %d \n" , wTime[iii] , rTime[iii] , wTime[iii]+rTime[iii]);
 	
 	exit();
 	return 0;

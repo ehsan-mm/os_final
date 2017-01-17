@@ -1,17 +1,22 @@
 #include "types.h"
 #include "user.h"
+#include "stat.h"
+
 int main (void)
 {
  int ChildPid[20];
- for(int j = 0; j<20 ; j++){
+ int j =0;
+ int i =0;
+ int ii =0;
+ for(j = 0; j<20 ; j++){
   	ChildPid[j] = fork();
 	if(ChildPid[j] == 0){
-	  for(int i =0 ; i<1000 ; i++);
+	  for(i =0 ; i<1000 ; i++);
 		exit();
 	}	
 		
 }
-  for(int i = 0 ; i<20 ; i++)
+  for(ii = 0 ; ii<20 ; ii++)
 	wait();
 
 	exit();
