@@ -103,3 +103,24 @@ sys_getperf(void)
 
 
 }
+
+sys_rrsanity(void)
+{
+
+return 0;
+
+}
+
+sys_frrsanity(void)
+{
+
+return 0;
+
+}
+
+sys_gsanity(void)
+{
+
+return 0;
+
+}
