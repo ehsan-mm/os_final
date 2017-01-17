@@ -78,23 +78,23 @@ int top2 = 0;
 int bot2 = -1;
 int cnt2 = 0;
 
-struct proc* peek() {
+struct proc* peek2() {
    return qq2[top2];
 }
 
-bool isEmpty() {
+bool isEmpty2() {
    return cnt2 == 0;
 }
 
-bool isFull() {
+bool isFull2() {
    return cnt2 == NPROC;
 }
 
-int size() {
+int size2() {
    return cnt2;
 }
 
-void insert(struct proc* data) {
+void insert2(struct proc* data) {
 
    if(!isFull()) {
 
@@ -107,7 +107,7 @@ void insert(struct proc* data) {
    }
 }
 
-struct proc* removeData() {
+struct proc* removeData2() {
    struct proc* data = qq2[top2++];
 
    if(top2 == NPROC) {
@@ -127,23 +127,23 @@ int top3 = 0;
 int bot3 = -1;
 int cnt3 = 0;
 
-struct proc* peek() {
+struct proc* peek3() {
    return qq3[top3];
 }
 
-bool isEmpty() {
+bool isEmpty3() {
    return cnt3 == 0;
 }
 
-bool isFull() {
+bool isFull3() {
    return cnt3 == NPROC;
 }
 
-int size() {
+int size3() {
    return cnt3;
 }
 
-void insert(struct proc* data) {
+void insert3(struct proc* data) {
 
    if(!isFull()) {
 
@@ -156,7 +156,7 @@ void insert(struct proc* data) {
    }
 }
 
-struct proc* removeData() {
+struct proc* removeData3() {
    struct proc* data = qq3[top3++];
 
    if(top3 == NPROC) {
@@ -176,23 +176,23 @@ int top4 = 0;
 int bot4 = -1;
 int cnt4 = 0;
 
-struct proc* peek() {
+struct proc* peek4() {
    return qq4[top4];
 }
 
-bool isEmpty() {
+bool isEmpty4() {
    return cnt4 == 0;
 }
 
-bool isFull() {
+bool isFull4() {
    return cnt4 == NPROC;
 }
 
-int size() {
+int size4() {
    return cnt4;
 }
 
-void insert(struct proc* data) {
+void insert4(struct proc* data) {
 
    if(!isFull()) {
 
@@ -205,7 +205,7 @@ void insert(struct proc* data) {
    }
 }
 
-struct proc* removeData() {
+struct proc* removeData4() {
    struct proc* data = qq4[top4++];
 
    if(top4 == NPROC) {
@@ -217,7 +217,6 @@ struct proc* removeData() {
 }
 
 //end of fourth array
-
 
 void
 pinit(void)
