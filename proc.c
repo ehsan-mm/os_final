@@ -274,9 +274,7 @@ found:
   p->ctime = ticks;         // start time
   p->etime = 0;             // end time
   p->rtime = 0;             // run time
- // p->p_level=high;
-
-
+  p->ppr = 3;               // priority
 
   return p;
 }
@@ -428,6 +426,7 @@ exit(void)
 
   // Jump into the scheduler, never to return.
   proc->state = ZOMBIE;
+  proc->etime = ticks;
   sched();
   panic("zombie exit");
 }
@@ -761,7 +760,7 @@ procdump(void)
 
 
 int
-getPerformanceData(int *wtime, int *rtime)
+getperf(int *wtime, int *rtime)
 {
   struct proc *p;
   int havekids, pid;
@@ -806,3 +805,4 @@ getPerformanceData(int *wtime, int *rtime)
     sleep(proc, &ptable.lock);  //DOC: wait-sleep
   }
 }
+

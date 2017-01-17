@@ -65,6 +65,7 @@ struct proc {
   char name[16];               // Process name (debugging)
   int ctime,etime,rtime;       // Define Vars
   float fs;                    // rtime/(curr-ctime)
+  int ppr;							    	 // priority
 
 };
 
